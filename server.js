@@ -16,12 +16,9 @@ mongoose.connect("mongodb+srv://parasellikomali:komali123@cluster0.k01v1dc.mongo
 //-------------------------- step 2 -------------------------?
 
 
-app.get('/',(req,res)=>{
-    res.send("Hello World")
-})
 
 //create the data POST
-app.post("/students/add",async(req,res)=>{
+app.post("/cars/add",async(req,res)=>{
 try{
 
 const user = new User(req.body);
@@ -36,7 +33,7 @@ res.send(err)
 });
 
 //To read the data 
-app.get("/students/:id",async(req,res)=>{
+app.get("/cars/:id",async(req,res)=>{
 try{
 
     const user = await User.findById(req.params.id);
@@ -48,6 +45,42 @@ try{
 }
 })
 
+//update
+app.put("/cars/update/:id",async(req,res)=>{
+  
+     try{
+
+        const user = await User.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new:true}
+
+        )
+
+        res.send(user);
+
+     }catch(err){
+
+     }
+
+})
+
+
+//delete 
+app.delete("/cars/:id",async(req,res)=>{
+
+    try{
+   
+
+        const user = await User.findByIdAndDelete(req.params.id);
+       res.send("user deleted");
+
+
+
+    }catch(err){
+    console.log(err)
+}
+})
 
 app.listen(4000,()=>{
     console.log("server started")
