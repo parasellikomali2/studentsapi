@@ -14,7 +14,9 @@ mongoose.connect("mongodb+srv://parasellikomali:komali123@cluster0.k01v1dc.mongo
 })
 
 //-------------------------- step 2 -------------------------?
-
+app.get("/", (req, res) => {
+  res.send("Student API is running successfully");
+});
 
 
 //create the data POST
